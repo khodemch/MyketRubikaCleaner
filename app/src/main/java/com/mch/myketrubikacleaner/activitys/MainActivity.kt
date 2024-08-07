@@ -440,7 +440,7 @@ class MainActivity : AppCompatActivity() {
             val appPackageName = packageName // این نام بسته برنامه است
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.type = "text/plain"
-            val shareMessage = "برنامه مورد علاقه خود را از لینک زیر دریافت کنید:\nhttps://cafebazaar.ir/app/$appPackageName/"
+            val shareMessage = "برنامه مورد علاقه خود را از لینک زیر دریافت کنید:\nhttps://myket.ir/app/$appPackageName/"
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage)
             startActivity(Intent.createChooser(shareIntent, "اشتراک‌گذاری برنامه با"))
         } catch (e: Exception) {
