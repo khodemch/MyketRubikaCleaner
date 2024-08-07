@@ -1,10 +1,13 @@
 package com.mch.myketrubikacleaner.activitys
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.provider.Settings
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -26,9 +29,13 @@ class AppsActivity : AppCompatActivity() {
     private lateinit var appsAdapter: AppsAdapter
     private var appsList: MutableList<AppsModel> = mutableListOf()
 
+    private val sharedPreferences by lazy {
+        getSharedPreferences("app_prefs", MODE_PRIVATE)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Adivery.configure(application, "61ab9370-74fd-4042-8b8d-ccab3cf5f991")
+        Adivery.configure(getApplication(), "471bde9b-e371-4bfa-adc9-56fe9ccac377")
         binding = DataBindingUtil.setContentView(this, R.layout.activity_apps)
 
         // پیکربندی Toolbar
@@ -78,28 +85,54 @@ class AppsActivity : AppCompatActivity() {
     }
 
     private fun checkPermissionsAndLoadApps() {
+        // بررسی وضعیت دسترسی ذخیره شده
+        if (sharedPreferences.getBoolean("has_storage_permission", false)) {
+            loadApps()
+            return
+        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             if (!Environment.isExternalStorageManager()) {
-//                val intent = Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
-//                startActivity(intent)
+                // اگر دسترسی داده نشده، صفحه دسترسی برنامه خود را نمایش بدهید
+                val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
+                intent.data = Uri.parse("package:$packageName")
+                startActivityForResult(intent, REQUEST_CODE_MANAGE_STORAGE)
             } else {
+                savePermissionStatus(true)
                 loadApps()
             }
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_PERMISSION_READ_EXTERNAL_STORAGE)
             } else {
+                savePermissionStatus(true)
                 loadApps()
             }
         } else {
-//            loadApps()
+            savePermissionStatus(true)
+            loadApps()
         }
+    }
+
+    private fun savePermissionStatus(hasPermission: Boolean) {
+        sharedPreferences.edit().putBoolean("has_storage_permission", hasPermission).apply()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_PERMISSION_READ_EXTERNAL_STORAGE && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            savePermissionStatus(true)
             loadApps()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_MANAGE_STORAGE) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Environment.isExternalStorageManager()) {
+                savePermissionStatus(true)
+                loadApps()
+            }
         }
     }
 
@@ -176,5 +209,6 @@ class AppsActivity : AppCompatActivity() {
 
     companion object {
         private const val REQUEST_PERMISSION_READ_EXTERNAL_STORAGE = 1
+        private const val REQUEST_CODE_MANAGE_STORAGE = 2
     }
 }

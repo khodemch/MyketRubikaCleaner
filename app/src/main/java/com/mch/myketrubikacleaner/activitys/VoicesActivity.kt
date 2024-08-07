@@ -27,7 +27,7 @@ class VoicesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Adivery.configure(application, "61ab9370-74fd-4042-8b8d-ccab3cf5f991")
+        Adivery.configure(application, "471bde9b-e371-4bfa-adc9-56fe9ccac377")
         binding = DataBindingUtil.setContentView(this, R.layout.activity_voices)
 
         // پیکربندی Toolbar

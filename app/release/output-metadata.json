@@ -4,15 +4,15 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.mch.rubikacleaner",
+  "applicationId": "com.mch.myketrubikacleaner",
   "variantName": "release",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 403,
-      "versionName": "1.0.404",
+      "versionCode": 411,
+      "versionName": "1.0.412",
       "outputFile": "app-release.apk"
     }
   ],
