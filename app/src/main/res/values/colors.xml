@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#F7FFF7</color>
+    <color name="white">#F7FFF7</color>
+    <color name="primaryColor">#1A535C</color>
+    <color name="primaryLightColor">#1A535C</color>
+    <color name="primaryDarkColor">#1A535C</color>
+    <color name="accentColor">#03DAC5</color>
+    <color name="textColor">#FFE66D</color>
+    <color name="pinky">#FF6B6B</color>
+
+    <style name="NavigationViewTextStyle" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textSize">@dimen/_16ssp</item> <!-- Change text size here -->
+        <item name="android:textStyle">bold</item> <!-- Make text bold -->
+        <item name="android:textColor">#F7FFF7</item> <!-- Change text color if needed -->
+        <item name="itemTextColor">@color/textColor</item>
+        <item name="itemIconTint">@color/textColor</item>
+        <item name="android:fontFamily">@font/yekan</item>
+<!--        <item name="android:background">@color/primaryColor</item>-->
+        <item name="android:statusBarColor">#1A535C</item>
+
+    </style>
+    <!-- NavigationView theme -->
+    <style name="NavigationViewTheme" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="android:textColorPrimary">#F7FFF7</item>
+        <item name="android:textAlignment">viewEnd</item>
+    </style>
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_exit</item>
+    </style>
+    <style name="YourAlertDialogTheme" parent="Theme.AppCompat.Dialog.Alert">
+        <!-- Customize background color and other attributes if needed -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <!-- Add any other customizations here -->
+    </style>
+</resources>

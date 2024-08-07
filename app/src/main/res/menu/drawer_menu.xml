@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:layout_gravity="right">
+        <item
+            android:id="@+id/bigFiles"
+            android:fontFamily="@font/yekan"
+            android:icon="@drawable/ic_big_files"
+            android:title="بزرگ ترین فایل ها" />
+
+    <item
+        android:id="@+id/shareAppItem"
+        android:fontFamily="@font/yekan"
+        android:icon="@drawable/share_app"
+
+        android:title="ارسال برنامه" />
+        <item
+            android:id="@+id/rateItem"
+            android:icon="@drawable/rate"
+            android:title="ثبت نظر" />
+    <item
+        android:id="@+id/guideItem"
+        android:icon="@drawable/ic_questions"
+        android:title="راهنما" />
+
+    <item
+        android:id="@+id/supportItem"
+        android:fontFamily="@font/yekan"
+        android:icon="@drawable/sp"
+        android:title="پشتیبانی"
+        />
+    <item
+        android:id="@+id/exitItem"
+        android:fontFamily="@font/yekan"
+        android:icon="@drawable/ic_exit"
+        android:title="خروج" />
+
+
+    <!-- بقیه آیتم‌ها -->
+    </group>
+</menu>

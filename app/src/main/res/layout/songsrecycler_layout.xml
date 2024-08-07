@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="app"
+            type="com.mch.myketrubikacleaner.models.AppsModel" />
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_4sdp"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_8sdp"
+            android:background="#1A535C">
+
+            <ImageView
+                android:id="@+id/songImageView"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/songsName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/yekan"
+                android:text="Songs Name"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold"
+                android:textColor="#F7FFF7"
+                android:layout_marginEnd="@dimen/_2sdp"
+                app:layout_constraintEnd_toStartOf="@+id/songImageView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/deleteSongImageView"
+                android:layout_width="@dimen/_33sdp"
+                android:layout_height="@dimen/_33sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/ic_menu_delete" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/informationSongTextView"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/_6sdp"-->
+<!--                android:text="information Song"-->
+<!--                android:fontFamily="@font/yekan"-->
+<!--                android:textSize="@dimen/_8ssp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textColor="#F7FFF7"-->
+<!--                android:layout_marginEnd="@dimen/_2sdp"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/songImageView"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/songsName" />-->
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

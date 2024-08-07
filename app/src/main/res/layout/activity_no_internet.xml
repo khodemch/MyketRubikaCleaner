@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#1A535C">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_no_internet" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="اینترنت متصل نیست، مجدد تلاش کنید"
+        android:fontFamily="@font/yekan"
+        android:textColor="#F7FFF7"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/_12sdp" />
+
+    <Button
+        android:id="@+id/retryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="تلاش مجدد"
+        android:fontFamily="@font/yekan"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:backgroundTint="#4ECDC4"
+        android:textColor="#F7FFF7"/>
+</LinearLayout>
