@@ -69,7 +69,7 @@ class MainAdapter(val context: Context, var imageList: MutableList<ImageModel>) 
 
         override fun onClick(view: View) {
             val position = adapterPosition
-            val placementId = "4698b8f9-aa91-415e-9ab9-67081271f172"
+            val placementId = "471bde9b-e371-4bfa-adc9-56fe9ccac377"
             currentPosition = position
 
             if (Adivery.isLoaded(placementId)) {

@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Adivery.configure(getApplication(), "61ab9370-74fd-4042-8b8d-ccab3cf5f991")
+        Adivery.configure(getApplication(), "2043f331-5c27-4d27-bea7-ee40ef4f3e87")
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         // Creating an extended library configuration.
