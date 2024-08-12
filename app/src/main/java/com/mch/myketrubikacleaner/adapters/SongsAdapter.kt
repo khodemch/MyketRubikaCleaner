@@ -100,9 +100,9 @@ class SongsAdapter(
                 .into(holder.binding.songImageView)
         } else {
             Glide.with(context)
-                .load(R.drawable.songs) // Default image if no cover found
-                .placeholder(R.drawable.songs)
-                .error(R.drawable.songs)
+                .load(R.drawable.icsong) // Default image if no cover found
+                .placeholder(R.drawable.icsong)
+                .error(R.drawable.icsong)
                 .into(holder.binding.songImageView)
         }
     }

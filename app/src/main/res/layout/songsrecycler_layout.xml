@@ -55,6 +55,7 @@
                 android:id="@+id/deleteSongImageView"
                 android:layout_width="@dimen/_33sdp"
                 android:layout_height="@dimen/_33sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@android:drawable/ic_menu_delete" />

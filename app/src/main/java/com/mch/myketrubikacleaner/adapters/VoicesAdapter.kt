@@ -47,7 +47,7 @@ class VoicesAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val voiceModel = voicesList[position]
-        holder.binding.voiceImageView.setImageResource(R.drawable.voices) // Placeholder for voice icon
+        holder.binding.voiceImageView.setImageResource(R.drawable.voiceicon) // Placeholder for voice icon
         holder.binding.voicesName.text = voiceModel.name
 
         // Display the voice file size

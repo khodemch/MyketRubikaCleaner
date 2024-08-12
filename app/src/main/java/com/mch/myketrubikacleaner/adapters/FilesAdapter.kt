@@ -85,7 +85,7 @@ class FilesAdapter(
         val fileModel = filesList[position]
 
         // Set placeholder icon for files
-        holder.binding.fileImageView.setImageResource(R.drawable.doc)
+        holder.binding.fileImageView.setImageResource(R.drawable.icdoc)
 
         // Use Glide to load image thumbnails
         val file = File(fileModel.path)
@@ -94,20 +94,20 @@ class FilesAdapter(
         if (extension in listOf("jpg", "jpeg", "gif", "png", "svg", "tiff")) {
             Glide.with(context)
                 .load(file)
-                .placeholder(R.drawable.doc)
+                .placeholder(R.drawable.icdoc)
                 .into(holder.binding.fileImageView)
         } else {
             // Set the icon based on the file type
             when (extension) {
-                "pdf" -> holder.binding.fileImageView.setImageResource(R.drawable.doc)
-                "doc", "docx" -> holder.binding.fileImageView.setImageResource(R.drawable.doc)
-                "xls", "xlsx" -> holder.binding.fileImageView.setImageResource(R.drawable.doc)
-                "ppt", "pptx" -> holder.binding.fileImageView.setImageResource(R.drawable.doc)
-                "txt", "txtx" -> holder.binding.fileImageView.setImageResource(R.drawable.doc)
-                "zip", "zipx" -> holder.binding.fileImageView.setImageResource(R.drawable.doc)
-                "rar", "rarx" -> holder.binding.fileImageView.setImageResource(R.drawable.doc)
-                "sys", "sysx" -> holder.binding.fileImageView.setImageResource(R.drawable.doc)
-                "tmp", "tmpx" -> holder.binding.fileImageView.setImageResource(R.drawable.doc)
+                "pdf" -> holder.binding.fileImageView.setImageResource(R.drawable.icdoc)
+                "doc", "docx" -> holder.binding.fileImageView.setImageResource(R.drawable.icdoc)
+                "xls", "xlsx" -> holder.binding.fileImageView.setImageResource(R.drawable.icdoc)
+                "ppt", "pptx" -> holder.binding.fileImageView.setImageResource(R.drawable.icdoc)
+                "txt", "txtx" -> holder.binding.fileImageView.setImageResource(R.drawable.icdoc)
+                "zip", "zipx" -> holder.binding.fileImageView.setImageResource(R.drawable.icdoc)
+                "rar", "rarx" -> holder.binding.fileImageView.setImageResource(R.drawable.icdoc)
+                "sys", "sysx" -> holder.binding.fileImageView.setImageResource(R.drawable.icdoc)
+                "tmp", "tmpx" -> holder.binding.fileImageView.setImageResource(R.drawable.icdoc)
             }
         }
 

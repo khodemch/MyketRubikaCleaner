@@ -171,12 +171,12 @@ class MainActivity : AppCompatActivity() {
 
             // تنظیم RecyclerView
             val imageList = mutableListOf<ImageModel>().apply {
-                add(ImageModel(R.drawable.pictures, "/path/to/pictures"))
-                add(ImageModel(R.drawable.movies, "/path/to/movies"))
-                add(ImageModel(R.drawable.songs, "/path/to/songs"))
-                add(ImageModel(R.drawable.apps, "/path/to/apps"))
-                add(ImageModel(R.drawable.voices, "/path/to/voices"))
-                add(ImageModel(R.drawable.doc, "/path/to/pdfs"))
+                add(ImageModel(R.drawable.icpic, "/path/to/pictures"))
+                add(ImageModel(R.drawable.icmovi, "/path/to/movies"))
+                add(ImageModel(R.drawable.icsong, "/path/to/songs"))
+                add(ImageModel(R.drawable.icapps, "/path/to/apps"))
+                add(ImageModel(R.drawable.voiceicon, "/path/to/voices"))
+                add(ImageModel(R.drawable.icdoc, "/path/to/pdfs"))
             }
 
             val recyclerView: RecyclerView = binding.mainRecyclerView
