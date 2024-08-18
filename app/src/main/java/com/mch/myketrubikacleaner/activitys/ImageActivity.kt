@@ -67,7 +67,7 @@ class ImageActivity : AppCompatActivity() {
         }
 
         imageAdapter = ImageAdapter(this, imageList)
-        binding.imageRecyclerView.layoutManager = GridLayoutManager(this, 2)
+        binding.imageRecyclerView.layoutManager = GridLayoutManager(this, 3)
         binding.imageRecyclerView.adapter = imageAdapter
 
         loadImagesFromFolders()
