@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#1A535C">
+    android:background="#0A1128">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -28,6 +28,6 @@
         android:text="تلاش مجدد"
         android:fontFamily="@font/yekan"
         android:layout_marginTop="@dimen/_12sdp"
-        android:backgroundTint="#4ECDC4"
+        android:backgroundTint="#034078"
         android:textColor="#F7FFF7"/>
 </LinearLayout>

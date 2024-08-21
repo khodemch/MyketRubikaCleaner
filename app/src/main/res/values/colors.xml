@@ -2,9 +2,9 @@
 <resources>
     <color name="black">#F7FFF7</color>
     <color name="white">#F7FFF7</color>
-    <color name="primaryColor">#1A535C</color>
-    <color name="primaryLightColor">#1A535C</color>
-    <color name="primaryDarkColor">#1A535C</color>
+    <color name="primaryColor">#0A1128</color>
+    <color name="primaryLightColor">#0A1128</color>
+    <color name="primaryDarkColor">#0A1128</color>
     <color name="accentColor">#03DAC5</color>
     <color name="textColor">#FFE66D</color>
     <color name="pinky">#FF6B6B</color>
@@ -17,7 +17,7 @@
         <item name="itemIconTint">@color/textColor</item>
         <item name="android:fontFamily">@font/yekan</item>
 <!--        <item name="android:background">@color/primaryColor</item>-->
-        <item name="android:statusBarColor">#1A535C</item>
+        <item name="android:statusBarColor">#0A1128</item>
 
     </style>
     <!-- NavigationView theme -->

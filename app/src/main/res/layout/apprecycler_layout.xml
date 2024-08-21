@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/_8sdp"
-            android:background="#1A535C">
+            android:background="#0A1128">
 
             <ImageView
                 android:id="@+id/appsImageView"

@@ -8,7 +8,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="@dimen/_4sdp"
     app:cardCornerRadius="@dimen/_8sdp"
-    android:backgroundTint="#1A535C"
+    android:backgroundTint="#0A1128"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"

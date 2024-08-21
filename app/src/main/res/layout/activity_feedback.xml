@@ -165,7 +165,7 @@
         android:orientation="vertical"
         android:padding="@dimen/_16sdp"
         android:fontFamily="@font/yekan"
-        android:background="#F7FFF7"
+        android:background="#0A1128"
         tools:context=".MainActivity">
 
         <TextView
@@ -175,18 +175,18 @@
             android:layout_gravity="center_horizontal"
             android:text="کاربر عزیز!"
             android:fontFamily="@font/yekan"
-            android:textColor="#1A535C"
+            android:textColor="#F7FFF7"
             android:textSize="@dimen/_16ssp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/btnPositiveFeedback"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-            android:backgroundTint="#1A535C"
+            android:backgroundTint="#034078"
             android:layout_marginTop="@dimen/_10sdp"
             android:text="بله"
             android:fontFamily="@font/yekan"
@@ -197,11 +197,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/btnNegativeFeedback"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-            android:backgroundTint="#1A535C"
+            android:backgroundTint="#034078"
             android:text="خیر"
             android:textColor="#F7FFF7"
             android:textSize="@dimen/_14ssp"
@@ -254,12 +254,12 @@
             app:layout_constraintStart_toStartOf="@+id/btnNegativeFeedback"
             app:layout_constraintTop_toBottomOf="@+id/negativeFeedbackContainer" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/btnSubmitNegativeFeedback"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/yekan"
-            android:backgroundTint="#1A535C"
+            android:backgroundTint="#034078"
             android:text="ارسال نظر"
             android:textColor="#F7FFF7"
             android:textSize="@dimen/_14ssp"
@@ -275,7 +275,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="روبیکا کلینر"
-            android:textColor="#1A535C"
+            android:textColor="#F7FFF7"
             android:textSize="@dimen/_16ssp"
             android:fontFamily="@font/yekan"
             android:textStyle="bold"
@@ -289,7 +289,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="مدیریت فایل های روبیکا"
-            android:textColor="#1A535C"
+            android:textColor="#F7FFF7"
             android:fontFamily="@font/yekan"
             android:textSize="@dimen/_16ssp"
             android:textStyle="bold"
@@ -305,7 +305,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/_10sdp"
             android:text="آیا از برنامه راضی هستید؟"
-            android:textColor="#1A535C"
+            android:textColor="#F7FFF7"
             android:textSize="@dimen/_16ssp"
             android:fontFamily="@font/yekan"
             app:layout_constraintEnd_toEndOf="@+id/textView3"
