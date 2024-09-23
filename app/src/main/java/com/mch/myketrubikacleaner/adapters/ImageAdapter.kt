@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.mch.myketrubikacleaner.R
 import com.mch.myketrubikacleaner.models.ImageModel
 import com.mch.myketrubikacleaner.databinding.ImagerecyclerLayoutBinding
@@ -69,7 +70,11 @@ class ImageAdapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val imageModel = items[position]
-        Glide.with(context).load(File(imageModel.path)).into(holder.binding.showImageView)
+        val requestOptions = RequestOptions().override(800, 800)
+        Glide.with(context)
+            .load(File(imageModel.path))
+            .apply(requestOptions)
+            .into(holder.binding.showImageView)
 
         holder.binding.showImageView.setOnClickListener {
             openImageWithExternalApp(imageModel.path)

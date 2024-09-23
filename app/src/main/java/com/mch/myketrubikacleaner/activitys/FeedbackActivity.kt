@@ -1,11 +1,15 @@
 package com.mch.myketrubikacleaner.activitys
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +23,6 @@ import com.mch.myketrubikacleaner.databinding.ActivityFeedbackBinding
 
 class FeedbackActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFeedbackBinding
-    private val feedbackViewModel: FeedbackViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_feedback)
@@ -31,45 +34,19 @@ class FeedbackActivity : AppCompatActivity() {
 
         val btnPositiveFeedback = binding.btnPositiveFeedback
         val btnNegativeFeedback = binding.btnNegativeFeedback
-        val negativeFeedbackContainer = binding.negativeFeedbackContainer
-        val btnSubmitNegativeFeedback = binding.btnSubmitNegativeFeedback
-        val editTextNegativeFeedback = binding.editTextNegativeFeedback
+        val exitButton = binding.exitButton
 
         btnPositiveFeedback.setOnClickListener {
             openMyketRatingPage()
         }
 
         btnNegativeFeedback.setOnClickListener {
-            negativeFeedbackContainer.visibility = View.VISIBLE
-            editTextNegativeFeedback.visibility = View.VISIBLE
-            btnSubmitNegativeFeedback.visibility = View.VISIBLE
+            showSupportDialog()
         }
 
-        btnSubmitNegativeFeedback.setOnClickListener {
-            val feedbackContent = editTextNegativeFeedback.text.toString()
-            if (feedbackContent.isNotEmpty()) {
-                val feedback = Feedback(content = feedbackContent)
-                feedbackViewModel.insert(feedback)
-                sendNegativeFeedbackToServer(feedbackContent)
-                negativeFeedbackContainer.visibility = View.GONE
-                editTextNegativeFeedback.visibility = View.GONE
-                btnSubmitNegativeFeedback.visibility = View.GONE
-                editTextNegativeFeedback.text.clear()
-            } else {
-                editTextNegativeFeedback.error = "لطفا نظر خود را وارد کنید"
-            }
+        exitButton.setOnClickListener {
+            finish()
         }
-
-        feedbackViewModel.allFeedback.observe(this, Observer { feedbacks ->
-            // Clear existing views or prepare for new data
-            // در اینجا می‌توانید کارهای لازم برای حذف نمایشگرهای قبلی یا آماده‌سازی برای داده‌های جدید انجام دهید
-
-            // نمایش تمام نظرات
-            for (feedback in feedbacks) {
-                Log.d("FeedbackActivity", "Feedback ID: ${feedback.id}, Content: ${feedback.content}")
-                // اینجا می‌توانید نظرات را به نمایش بگذارید، برای نمونه می‌توانید آن‌ها را به یک لیست یا RecyclerView اضافه کنید
-            }
-        })
     }
 
     private fun openMyketRatingPage() {
@@ -105,17 +82,125 @@ class FeedbackActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun sendNegativeFeedbackToServer(feedback: String) {
-        // کد برای ارسال نظر منفی به سرور یا ذخیره در دیتابیس
-        // برای نمونه نمایش یک دیالوگ به کاربر
-        AlertDialog.Builder(this)
-            .setTitle("تشکر!")
-            .setMessage("نظر شما با موفقیت ارسال شد.")
-            .setPositiveButton("باشه") { dialog, _ ->
-                dialog.dismiss()
-                finish()
+    private fun showSupportDialog() {
+        // Inflate custom dialog layout
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.custom_support_dialog, null)
+        val dialog = AlertDialog.Builder(this, R.style.YourAlertDialogTheme).apply {
+            setView(dialogView)
+        }.create()
+
+        // Initialize views from custom dialog layout
+        val title = dialogView.findViewById<TextView>(R.id.dialogTitle)
+        val btnWhatsApp = dialogView.findViewById<Button>(R.id.btnWhatsApp)
+        val btnTelegram = dialogView.findViewById<Button>(R.id.btnTelegram)
+
+        // Set title and message
+        title.text = "کاربر عزیز 🌹💚 اگر مسئله ایی هنگام کار با برنامه داری یا انتقاد و پیشنهادی داری حتما بهم پیام بده. با تشکر"
+
+        // Handle button clicks
+        btnWhatsApp.setOnClickListener {
+            openWhatsApp()
+            dialog.dismiss()
+        }
+
+        btnTelegram.setOnClickListener {
+            openTelegram()
+            dialog.dismiss()
+        }
+
+        // Set dialog view and show
+        dialog.setView(dialogView)
+        dialog.show()
+    }
+
+    private fun openWhatsApp() {
+        val contact = "989903076472" // شماره تلفن یا آیدی واتساپ شما
+        val whatsappUri = "https://wa.me/$contact"
+
+        // ایجاد Intent برای باز کردن واتساپ
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(whatsappUri))
+
+        // بررسی نصب بودن واتساپ
+        val packageManager = packageManager
+        val resolveInfoList =
+            packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
+
+        var isWhatsAppInstalled = false
+        for (resolveInfo in resolveInfoList) {
+            if (resolveInfo.activityInfo.packageName == "com.whatsapp" ||
+                resolveInfo.activityInfo.packageName == "com.whatsapp.w4b" || // WhatsApp Business
+                resolveInfo.activityInfo.packageName == "com.gbwhatsapp"
+            ) {  // GB WhatsApp
+                isWhatsAppInstalled = true
+                intent.setPackage(resolveInfo.activityInfo.packageName)
+                break
             }
-            .show()
+        }
+
+        if (isWhatsAppInstalled) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                // اندروید 12 به بالا
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                // اندروید 10 تا 12
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            } else {
+                // اندروید 10 به پایین
+                // تنظیمات خاص اگر نیاز باشد
+            }
+            startActivity(intent)
+        } else {
+            // اگر واتساپ نصب نیست، باز کردن لینک واتساپ وب
+            val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse(whatsappUri))
+            startActivity(webIntent)
+        }
+    }
+
+
+    private fun openTelegram() {
+        val username = "RubikaCleanerSupport" // نام کاربری تلگرام شما
+        val telegramUri = "tg://resolve?domain=$username"
+        val webUri = "https://t.me/$username"
+
+        // ایجاد Intent برای باز کردن تلگرام
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(telegramUri))
+
+        // بررسی نصب بودن تلگرام
+        val packageManager = packageManager
+        val resolveInfoList =
+            packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
+
+        var isTelegramInstalled = false
+        for (resolveInfo in resolveInfoList) {
+            if (resolveInfo.activityInfo.packageName == "org.telegram.messenger" ||
+                resolveInfo.activityInfo.packageName == "org.telegram.messenger.web" ||
+                resolveInfo.activityInfo.packageName == "org.telegram.plus" ||
+                resolveInfo.activityInfo.packageName == "org.telegram.messenger.beta" ||
+                resolveInfo.activityInfo.packageName == "org.telegram.messenger.wear"
+            ) {
+                isTelegramInstalled = true
+                intent.setPackage(resolveInfo.activityInfo.packageName)
+                break
+            }
+        }
+
+        if (isTelegramInstalled) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                // اندروید 12 به بالا
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                // اندروید 10 تا 12
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            } else {
+                // اندروید 10 به پایین
+                // تنظیمات خاص اگر نیاز باشد
+            }
+            startActivity(intent)
+        } else {
+            // اگر تلگرام نصب نیست، باز کردن وبسایت تلگرام
+            val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse(webUri))
+            startActivity(webIntent)
+        }
     }
 
     override fun onBackPressed() {

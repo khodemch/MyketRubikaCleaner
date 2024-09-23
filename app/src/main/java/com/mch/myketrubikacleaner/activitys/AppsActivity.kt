@@ -1,6 +1,7 @@
 package com.mch.myketrubikacleaner.activitys
 
 import android.Manifest
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -10,6 +11,7 @@ import android.os.Environment
 import android.provider.Settings
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -92,14 +94,20 @@ class AppsActivity : AppCompatActivity() {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            if (!Environment.isExternalStorageManager()) {
-                // اگر دسترسی داده نشده، صفحه دسترسی برنامه خود را نمایش بدهید
-                val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
-                intent.data = Uri.parse("package:$packageName")
-                startActivityForResult(intent, REQUEST_CODE_MANAGE_STORAGE)
-            } else {
-                savePermissionStatus(true)
-                loadApps()
+            try {
+                if (!Environment.isExternalStorageManager()) {
+                    // اگر دسترسی داده نشده، صفحه دسترسی برنامه خود را نمایش بدهید
+                    val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
+                    intent.data = Uri.parse("package:$packageName")
+                    startActivityForResult(intent, REQUEST_CODE_MANAGE_STORAGE)
+                } else {
+                    savePermissionStatus(true)
+                    loadApps()
+                }
+            } catch (e: ActivityNotFoundException) {
+                e.printStackTrace()
+                // نمایش پیام در صورتی که Intent پشتیبانی نمی‌شود
+                showStoragePermissionError()
             }
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -113,6 +121,12 @@ class AppsActivity : AppCompatActivity() {
             loadApps()
         }
     }
+
+    private fun showStoragePermissionError() {
+        // نمایش یک پیام یا دیالوگ برای کاربر
+        Toast.makeText(this, "دسترسی به فایل‌های مدیریتی در این دستگاه پشتیبانی نمی‌شود.", Toast.LENGTH_LONG).show()
+    }
+
 
     private fun savePermissionStatus(hasPermission: Boolean) {
         sharedPreferences.edit().putBoolean("has_storage_permission", hasPermission).apply()

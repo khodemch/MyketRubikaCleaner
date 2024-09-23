@@ -21,6 +21,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.mch.myketrubikacleaner.R
 import com.mch.myketrubikacleaner.databinding.SongsrecyclerLayoutBinding
 import java.io.File
@@ -87,23 +88,37 @@ class SongsAdapter(
         val file = filesList[position]
         holder.binding.songsName.text = file.name
 
-        // Load music cover image using Glide
+        // Load music cover image using Glide with optimization
         val retriever = MediaMetadataRetriever()
-        retriever.setDataSource(file.path)
-        val coverBytes = retriever.embeddedPicture
-        retriever.release()
-
-        if (coverBytes != null) {
-            Glide.with(context)
-                .asBitmap()
-                .load(coverBytes)
-                .into(holder.binding.songImageView)
-        } else {
-            Glide.with(context)
-                .load(R.drawable.icsong) // Default image if no cover found
-                .placeholder(R.drawable.icsong)
-                .error(R.drawable.icsong)
-                .into(holder.binding.songImageView)
+        try {
+            if (file.exists()) {
+                retriever.setDataSource(file.path)
+                val coverBytes = retriever.embeddedPicture
+                if (coverBytes != null) {
+                    Glide.with(context)
+                        .asBitmap()
+                        .load(coverBytes)
+                        .apply(RequestOptions().override(150, 150)) // Resize image to avoid OOM
+                        .into(holder.binding.songImageView)
+                } else {
+                    Glide.with(context)
+                        .load(R.drawable.icsong) // Default image if no cover found
+                        .apply(RequestOptions().override(150, 150)) // Resize image
+                        .placeholder(R.drawable.icsong)
+                        .error(R.drawable.icsong)
+                        .into(holder.binding.songImageView)
+                }
+            } else {
+                Toast.makeText(context, "فایل وجود ندارد", Toast.LENGTH_SHORT).show()
+            }
+        } catch (e: IllegalArgumentException) {
+            e.printStackTrace()
+            Toast.makeText(context, "فایل نامعتبر است", Toast.LENGTH_SHORT).show()
+        } catch (e: SecurityException) {
+            e.printStackTrace()
+            Toast.makeText(context, "دسترسی به فایل امکان‌پذیر نیست", Toast.LENGTH_SHORT).show()
+        } finally {
+            retriever.release()
         }
     }
 
