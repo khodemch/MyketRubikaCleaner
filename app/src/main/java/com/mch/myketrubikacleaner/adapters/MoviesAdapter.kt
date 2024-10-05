@@ -67,7 +67,10 @@ class MoviesAdapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val videoModel = items[position]
-        Glide.with(context).load(File(videoModel.path)).into(holder.binding.showMovieImageView)
+        Glide.with(context)
+            .load(File(videoModel.path))
+            .override(800, 800)
+            .into(holder.binding.showMovieImageView)
 
         holder.binding.deleteMovieImageView.setOnClickListener {
             showDeleteConfirmationDialog(position)

@@ -194,26 +194,16 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView2"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mainRecyclerView"
                 android:layout_width="@dimen/_270sdp"
-                android:layout_height="@dimen/_350sdp"
-                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_height="@dimen/_230sdp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:background="#F7FFF7"
-                app:cardCornerRadius="@dimen/_8sdp"
-                app:cardElevation="@dimen/_5sdp"
-                app:layout_constraintBottom_toTopOf="@+id/guideline6"
-                app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toTopOf="@+id/guideline8">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/mainRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#F7FFF7" />
-
-            </androidx.cardview.widget.CardView>
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"
@@ -237,18 +227,22 @@
                 app:layout_constraintGuide_percent="0.09" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.93" />
-
-            <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.34" />
+
+            <com.adivery.sdk.AdiveryBannerAdView
+                android:id="@+id/banner_ad"
+                android:layout_width="320dp"
+                android:layout_height="100dp"
+                app:banner_size="large_banner"
+                android:layout_marginBottom="@dimen/_5sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:placement_id="b8d1d3de-ed8d-48ff-9ef1-8c957f550759" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

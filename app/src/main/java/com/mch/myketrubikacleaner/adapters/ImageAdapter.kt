@@ -73,6 +73,7 @@ class ImageAdapter(
         val requestOptions = RequestOptions().override(800, 800)
         Glide.with(context)
             .load(File(imageModel.path))
+            .override(800, 800)
             .apply(requestOptions)
             .into(holder.binding.showImageView)
 

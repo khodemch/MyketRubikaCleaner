@@ -88,24 +88,24 @@ class SongsAdapter(
         val file = filesList[position]
         holder.binding.songsName.text = file.name
 
-        // Load music cover image using Glide with optimization
+        // Use MediaMetadataRetriever to retrieve metadata and cover image
         val retriever = MediaMetadataRetriever()
         try {
             if (file.exists()) {
-                retriever.setDataSource(file.path)
+                val fileUri = Uri.fromFile(file) // Convert file to Uri
+                retriever.setDataSource(context, fileUri) // Set Uri as data source
                 val coverBytes = retriever.embeddedPicture
                 if (coverBytes != null) {
                     Glide.with(context)
                         .asBitmap()
                         .load(coverBytes)
-                        .apply(RequestOptions().override(150, 150)) // Resize image to avoid OOM
+                        .apply(RequestOptions().override(150, 150))
                         .into(holder.binding.songImageView)
                 } else {
+                    // Load default image if no cover found
                     Glide.with(context)
-                        .load(R.drawable.icsong) // Default image if no cover found
-                        .apply(RequestOptions().override(150, 150)) // Resize image
-                        .placeholder(R.drawable.icsong)
-                        .error(R.drawable.icsong)
+                        .load(R.drawable.icsong)
+                        .apply(RequestOptions().override(150, 150))
                         .into(holder.binding.songImageView)
                 }
             } else {
@@ -121,6 +121,7 @@ class SongsAdapter(
             retriever.release()
         }
     }
+
 
     override fun getItemCount(): Int {
         return filesList.size

@@ -30,6 +30,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adivery.sdk.Adivery
@@ -108,7 +109,7 @@ class MainActivity : AppCompatActivity() {
             finish()
             return
         } else {
-            binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+//            binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
             // تنظیم DrawerLayout و NavigationView
             drawerLayout = findViewById(R.id.drawer_layout)
@@ -180,7 +181,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             val recyclerView: RecyclerView = binding.mainRecyclerView
-            recyclerView.layoutManager = LinearLayoutManager(this)
+            recyclerView.layoutManager = GridLayoutManager(this, 3)
+
             val adapter = MainAdapter(this, imageList)
             recyclerView.adapter = adapter
 
